@@ -15,8 +15,6 @@ browser.find_element_by_xpath("//input[@id='imgSearch']").click()
 page = browser.page_source
 soup = BeautifulSoup(page, features='lxml')
 
-browser.close()
-
 link=[]
 name=[]
 
@@ -34,7 +32,18 @@ x = int(input())
 
 URL = "https://kissmanga.com"+link[x-1]
 
-browser = webdriver.Chrome("/home/piyush/Downloads/chromedriver_linux64/chromedriver")
 browser.get(URL)
 
-time.sleep(12)
+page = browser.page_source
+soup = BeautifulSoup(page, features='lxml')
+
+link=[]
+name=[]
+
+for t in soup.find_all('table',attrs={'class':'listing'}):
+    for a in t.find_all('a',href=True):
+        link.append(a['href'])
+        name.append(a.text.replace('\n','').strip())
+
+
+browser.close()
