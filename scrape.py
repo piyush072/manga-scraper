@@ -4,17 +4,7 @@ import time
 import urllib
 import os
 from pyvirtualdisplay import Display # requires xvfv- sudo apt-get install xvfb
-
-def ProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█'):
-
-    iteration = iteration+1
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = '\r')
-    # Print New Line on Complete
-    if iteration == total:
-        print()
+import progress
 
 def scrape():
     display = Display(visible=0, size=(800, 600))
@@ -91,14 +81,14 @@ def scrape():
 
     l=len(image)
 
-    ProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+    progress.ProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
     for i in range(0,l):
         na = str(i)+"."+image[i].split('.')[len(image[i].split('.'))-1]
 
         urllib.request.urlretrieve(image[i], os.path.join(my_path, na))
 
-        ProgressBar( i, l, prefix = 'Progress', suffix = 'Complete', length = 50)
+        progress.ProgressBar( i, l, prefix = 'Progress', suffix = 'Complete', length = 50)
 
 
     browser.close()
