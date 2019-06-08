@@ -5,6 +5,7 @@ import urllib
 import os
 from pyvirtualdisplay import Display # requires xvfv- sudo apt-get install xvfb
 import progress
+import sys
 
 def scrape():
     display = Display(visible=0, size=(800, 600))
@@ -20,8 +21,7 @@ def scrape():
     print()
 
     search = browser.find_element_by_xpath("//input[@id='keyword']")
-    srch = input("Search: ")
-    search.send_keys(srch)
+    search.send_keys(sys.argv[1])
 
     print("Searching")
 
