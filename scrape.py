@@ -21,7 +21,7 @@ URL = "https://kissmanga.com"
 browser.get(URL+"/Manga/One-Piece")
 
 time.sleep(12)
-'''
+
 search = browser.find_element_by_xpath("//input[@id='keyword']")
 search.send_keys("One Piece")
 
@@ -46,7 +46,7 @@ x = int(input())
 
 
 browser.get(URL+link[x-1])
-'''
+
 
 page = browser.page_source
 soup = BeautifulSoup(page, features='lxml')
@@ -77,7 +77,7 @@ l=len(image)
 ProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
 for i in range(0,l):
-    na = str(i)+"."+image[i].split('.')[1]
+    na = str(i)+"."+image[i].split('.')[len(image[i].split('.'))-1]
 
     urllib.request.urlretrieve(image[i], os.path.join(my_path, na))
 
