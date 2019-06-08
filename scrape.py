@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import urllib
 import os
-from pyvirtualdisplay import Display
+from pyvirtualdisplay import Display # requires xvfv- sudo apt-get install xvfb
 
 def ProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█'):
 
