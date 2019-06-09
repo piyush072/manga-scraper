@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 import urllib
 from urllib.parse import urlparse
 import os
-from pyvirtualdisplay import Display # requires xvfv- sudo apt-get install xvfb
+from pyvirtualdisplay import Display # requires xvfb- sudo apt-get install xvfb
 import progress
 import sys
 
