@@ -11,3 +11,5 @@ search "One Piece" #to search for manga and the select the choice from the list
 download https://kissmanga.com/Manga/One-Piece/945---O-Lin #to directly download the manga from the given link
 ```
 The Manga is then downloaded in /home/username/Downloads
+
+Don't forget to change the username and path to webdriver in scrape.py
