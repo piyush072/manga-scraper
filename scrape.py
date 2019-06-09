@@ -1,6 +1,7 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
+from selenium.webdriver.common.keys import Keys
 import urllib
 from urllib.parse import urlparse
 import os
@@ -8,18 +9,21 @@ from pyvirtualdisplay import Display # requires xvfv- sudo apt-get install xvfb
 import progress
 import sys
 
+option = webdriver.ChromeOptions()
+chrome_prefs = {}
+option.experimental_options["prefs"] = chrome_prefs
+chrome_prefs["profile.default_content_settings"] = {"images": 2}
+chrome_prefs["profile.managed_default_content_settings"] = {"images": 2}
 
 display = Display(visible=0, size=(800, 600))
 display.start()
 
-browser = webdriver.Chrome("/home/piyush/Downloads/chromedriver_linux64/chromedriver")
-
-q = int(0)
+browser = webdriver.Chrome("/home/piyush/Downloads/chromedriver_linux64/chromedriver",options=option)
 
 def scrape():
 
     if(urlparse((sys.argv[1])).scheme!=''):
-        download(sys.argv[1],sys.argv[1].split('/')[len(sys.argv[1].split('/'))-1].split('\\')[0])
+        download(sys.argv[1],sys.argv[1].split('/')[len(sys.argv[1].split('/'))-1].split('\\')[0],0)
     else:
         URL = "https://kissmanga.com"
         browser.get(URL)
@@ -30,10 +34,10 @@ def scrape():
 
         search = browser.find_element_by_xpath("//input[@id='keyword']")
         search.send_keys(sys.argv[1])
-
+        search.send_keys(Keys.RETURN)
         print("Searching")
 
-        browser.find_element_by_xpath("//input[@id='imgSearch']").click()
+        #browser.find_element_by_xpath("//input[@id='imgSearch']").click()
 
         page = browser.page_source
         soup = BeautifulSoup(page, features='lxml')
@@ -73,18 +77,17 @@ def scrape():
 
         x = int(input("Enter choice: "))
         chp = name[x-1]
-        q = 1
-        download(URL+link[x-1],chp)
+        download(URL+link[x-1],chp,1)
 
 
     browser.close()
     display.stop()
 
-def download(URL,chp):
+def download(URL,chp,q):
 
     browser.get(URL)
     if(q==0):
-        time.sleep(12)
+        time.sleep(10)
     my_path = '/home/piyush/Downloads/'+chp
 
     try:
