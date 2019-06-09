@@ -18,7 +18,7 @@ chrome_prefs["profile.managed_default_content_settings"] = {"images": 2}
 display = Display(visible=0, size=(800, 600))
 display.start()
 
-browser = webdriver.Chrome("/home/piyush/Downloads/chromedriver_linux64/chromedriver",options=option)
+browser = webdriver.Chrome("/home/piyush/Downloads/chromedriver_linux64/chromedriver",options=option) #change path here
 
 def scrape():
 
@@ -88,7 +88,7 @@ def download(URL,chp,q):
     browser.get(URL)
     if(q==0):
         time.sleep(10)
-    my_path = '/home/piyush/Downloads/'+chp
+    my_path = '/home/piyush/Downloads/'+chp #change path here
 
     try:
         os.mkdir(my_path)
