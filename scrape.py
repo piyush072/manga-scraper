@@ -58,6 +58,14 @@ def scrape():
 
         x = int(input("Enter choice: "))
 
+        t = urlparse(URL+link[x-1]).path.split('/')
+        v = len(t)
+        if(v>3):
+            download(URL+link[x-1],t[3],1)
+            browser.close()
+            display.stop()
+            sys.exit()
+
         browser.get(URL+link[x-1])
 
 
@@ -72,7 +80,7 @@ def scrape():
                 link.append(a['href'])
                 name.append(a.text.replace('\n','').strip())
 
-        for i in range(0,11):
+        for i in range(0,6):
             print(str(i+1)+".",name[i])
 
         x = int(input("Enter choice: "))
@@ -107,17 +115,17 @@ def download(URL,chp,q):
             image.append(img['src'])
 
     l=len(image)
+    print("Downloading "+chp)
 
     progress.ProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
     for i in range(0,l):
-        na = str(i)+"."+image[i].split('.')[len(image[i].split('.'))-1]
 
-        urllib.request.urlretrieve(image[i], os.path.join(my_path, na))
+        urllib.request.urlretrieve(image[i], os.path.join(my_path, str(i)))
 
         progress.ProgressBar( i, l, prefix = 'Progress', suffix = 'Complete', length = 50)
 
-
+    print("File Downloaded at "+my_path)
 
 if __name__=="__main__":
     scrape()
