@@ -5,6 +5,8 @@ Inspired from [Khed](https://github.com/bnu123/Khed) I've made this CLI applicat
 clone this repository
 ```bash
 cd manga-scraper
+sudo apt-get install xvfb
+pip install -r requirements.txt
 source commands.sh
 search "One Piece" #to search for manga and the select the choice from the list
   or
