@@ -26,18 +26,14 @@ def scrape():
         download(sys.argv[1],sys.argv[1].split('/')[len(sys.argv[1].split('/'))-1].split('\\')[0],0)
     else:
         URL = "https://kissmanga.com"
+        print("Fetching Data ....")
         browser.get(URL)
-        print("Fetching Data ....", end =" ")
         time.sleep(10)
         print("Searching")
-
-        print()
 
         search = browser.find_element_by_xpath("//input[@id='keyword']")
         search.send_keys(sys.argv[1])
         search.send_keys(Keys.RETURN)
-
-        #browser.find_element_by_xpath("//input[@id='imgSearch']").click()
 
         page = browser.page_source
         soup = BeautifulSoup(page, features='lxml')
