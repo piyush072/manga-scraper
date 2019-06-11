@@ -80,13 +80,26 @@ def scrape():
                 link.append(a['href'])
                 name.append(a.text.replace('\n','').strip())
 
-        for i in range(0,6):
+        for i in range(0,len(link)+1):
             print(str(i+1)+".",name[i])
+            if(i%10 == 0 and len(link)>i and i!=0):
+                x = input("enter choice or press N for next(eg. 7 or 1-10):")
+                if(x == 'n' or x == 'N'):
+                    continue
+                else:
+                    break
+            if(i==len(link)-1):
+                x = input("enter choice(eg. 7 or 1-10):")
+                break
 
-        x = int(input("Enter choice: "))
-        chp = name[x-1]
-        download(URL+link[x-1],chp,1)
-
+        x = x.split('-')
+        if(len(x)==1):
+            chp = name[int(x[0])-1]
+            download(URL+link[int(x[0])-1],chp,1)
+        else:
+            for i in range(int(x[0])-1,int(x[1])):
+                chp = name[i-1]
+                download(URL+link[i-1],chp,1)
 
     browser.close()
     display.stop()
