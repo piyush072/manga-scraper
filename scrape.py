@@ -99,7 +99,7 @@ def scrape():
         else:
             for i in range(int(x[0])-1,int(x[1])):
                 chp = name[i-1]
-                download(URL+link[i-1],chp,1)
+                download(URL+link[i],chp,1)
 
     browser.close()
     display.stop()
