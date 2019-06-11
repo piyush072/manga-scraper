@@ -27,15 +27,15 @@ def scrape():
     else:
         URL = "https://kissmanga.com"
         browser.get(URL)
-        print("Fetching Data .", end =" ")
+        print("Fetching Data ....", end =" ")
         time.sleep(10)
+        print("Searching")
 
         print()
 
         search = browser.find_element_by_xpath("//input[@id='keyword']")
         search.send_keys(sys.argv[1])
         search.send_keys(Keys.RETURN)
-        print("Searching")
 
         #browser.find_element_by_xpath("//input[@id='imgSearch']").click()
 
